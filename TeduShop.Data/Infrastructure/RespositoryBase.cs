@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TeduShop.Data.Infrastructure
 {
-    public class RespositoryBase<T> where T : class
+    public class RespositoryBase<T> :IResponsitory<T> where T : class
     {
         #region Properties
         private TeduShopDbContext dataContext;
@@ -95,30 +95,32 @@ namespace TeduShop.Data.Infrastructure
             }
             return dataContext.Set<T>().Where<T>(predicate).AsQueryable<T>();
         }
-        //public virtual IQueryable<T> GetMultiPaging(Expression<Func<T, bool>> predicate, out int total, int index = 0, int size = 50, string[] includes = null)
-        //{
-        //    int skipCount = index * size;
-        //    IQueryable<T> _resetSet;
-        //    if (includes != null && includes.Count() > 0)
-        //    {
-        //        var query = dataContext.Set<T>().Include(includes.First());
-        //        foreach (var include in includes.Skip(1))
-        //        {
-        //            query = query.Include(include);
-        //            _resetSet = predicate != null ? dataContext.Set<T>().Where<T>(predicate).AsQueryable() : query.AsQueryable();
-        //        }
-        //    }
-        //    else
-        //    {
-        //        _resetSet = predicate != null ? dataContext.Set<T>().Where<T>(predicate).AsQueryable() : dataContext.Set<T>().AsQueryable();
-        //    }
-        //    //_resetSet = skipCount == 0 ? _resetSet.Take(size) : _resetSet.Skip(skipCount).Take(size);
-        //    //total = _resetSet.Count();
-        //    return _resetSet.AsQueryable();
-        //}
         public bool CheckContains(Expression<Func<T, bool>> predicare)
         {
             return dataContext.Set<T>().Count<T>(predicare) > 0;
+        }
+
+        public virtual IEnumerable<T> GetMultiPaging(Expression<Func<T, bool>> predicate, out int total, int index = 0, int size = 50, string[] includes = null)
+        {
+            int skipCount = index * size;
+            IQueryable<T> _resetSet;
+
+            //HANDLE INCLUDES FOR ASSOCIATED OBJECTS IF APPLICABLE
+            if (includes != null && includes.Count() > 0)
+            {
+                var query = dataContext.Set<T>().Include(includes.First());
+                foreach (var include in includes.Skip(1))
+                    query = query.Include(include);
+                _resetSet = predicate != null ? query.Where<T>(predicate).AsQueryable() : query.AsQueryable();
+            }
+            else
+            {
+                _resetSet = predicate != null ? dataContext.Set<T>().Where<T>(predicate).AsQueryable() : dataContext.Set<T>().AsQueryable();
+            }
+
+            _resetSet = skipCount == 0 ? _resetSet.Take(size) : _resetSet.Skip(skipCount).Take(size);
+            total = _resetSet.Count();
+            return _resetSet.AsQueryable();
         }
         #endregion
     }

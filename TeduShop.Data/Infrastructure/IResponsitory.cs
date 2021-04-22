@@ -26,8 +26,7 @@ namespace TeduShop.Data.Infrastructure
         IQueryable<T> GetAll(string[] includes = null);
 
         IQueryable<T> GetMulti(Expression<Func<T, bool>> predicate, string[] includes = null);
-        IQueryable<T> GetMultiPaging(Expression<Func<T, bool>> filter,out int total,int index=0,int size=50, string[] includes = null);
-        int Count(Expression<Func<T, bool>> where);
+        IEnumerable<T> GetMultiPaging(Expression<Func<T, bool>> predicate, out int total, int index = 0, int size = 50, string[] includes = null);
         bool CheckContains(Expression<Func<T, bool>> predicare);
     }
 }
