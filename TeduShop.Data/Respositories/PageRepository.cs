@@ -3,12 +3,12 @@ using TeduShop.Model.Models;
 
 namespace TeduShop.Data.Respositories
 {
-    public class PageRepository : RespositoryBase<Page>
+    public interface IPageRepository : IResponsitory<Page>
     {
-        public interface IPageRepository
-        {
 
-        }
+    }
+    public class PageRepository : RespositoryBase<Page>, IPageRepository
+    {
         public PageRepository(IDbFactory dbFactory) : base(dbFactory)
         {
 

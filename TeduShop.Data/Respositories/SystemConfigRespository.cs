@@ -3,12 +3,12 @@ using TeduShop.Model.Models;
 
 namespace TeduShop.Data.Respositories
 {
-    public class SystemConfigRespository : RespositoryBase<SystemCofig>
+    public interface ISystemConfigRespository : IResponsitory<SystemCofig>
     {
-        public interface ISystemConfigRespository
-        {
 
-        }
+    }
+    public class SystemConfigRespository : RespositoryBase<SystemCofig>, ISystemConfigRespository
+    {
         public SystemConfigRespository(IDbFactory dbFactory) : base(dbFactory)
         {
 

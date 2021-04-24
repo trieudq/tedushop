@@ -3,12 +3,12 @@ using TeduShop.Model.Models;
 
 namespace TeduShop.Data.Respositories
 {
-    public class OrderRepository : RespositoryBase<Order>
+    public interface IOrderRepository : IResponsitory<Order>
     {
-        public interface IOrderRepository
-        {
 
-        }
+    }
+    public class OrderRepository : RespositoryBase<Order>, IOrderRepository
+    {
         public OrderRepository(IDbFactory dbFactory) : base(dbFactory)
         {
 

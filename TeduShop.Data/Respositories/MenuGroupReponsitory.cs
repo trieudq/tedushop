@@ -3,12 +3,12 @@ using TeduShop.Model.Models;
 
 namespace TeduShop.Data.Respositories
 {
-    public class MenuGroupReponsitory : RespositoryBase<MenuGroup>
+    public interface IMenuGroupReponsitory : IResponsitory<MenuGroup>
     {
-        public interface IMenuGroupReponsitory
-        {
 
-        }
+    }
+    public class MenuGroupReponsitory : RespositoryBase<MenuGroup>, IMenuGroupReponsitory
+    {
         public MenuGroupReponsitory(IDbFactory dbFactory) : base(dbFactory)
         {
 

@@ -3,12 +3,12 @@ using TeduShop.Model.Models;
 
 namespace TeduShop.Data.Respositories
 {
-    public class PostTagRespository : RespositoryBase<PostTag>
+    public interface IPostTagRespository : IResponsitory<PostTag>
     {
-        public interface IPostTagRespository
-        {
 
-        }
+    }
+    public class PostTagRespository : RespositoryBase<PostTag>, IPostTagRespository
+    {
         public PostTagRespository(IDbFactory dbFactory) : base(dbFactory)
         {
 
