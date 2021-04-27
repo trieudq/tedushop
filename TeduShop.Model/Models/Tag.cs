@@ -11,7 +11,5 @@ namespace TeduShop.Model.Models
         public string ID { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
-        public virtual IEnumerable<PostTag> PostTags { get; set; }
-        public virtual IEnumerable<ProductTag> ProductTags { get; set; }
     }
 }

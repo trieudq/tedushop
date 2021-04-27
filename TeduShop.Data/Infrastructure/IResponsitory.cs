@@ -10,7 +10,7 @@ namespace TeduShop.Data.Infrastructure
     public interface IResponsitory<T> where T: class
     {
         //Marks an entity as new
-        void Add(T entity);
+        T Add(T entity);
         //Marks an entity as Modified
         void Update(T entity);
         //Marks an entity to be Removed

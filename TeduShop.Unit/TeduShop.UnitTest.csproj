@@ -52,6 +52,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -70,10 +71,6 @@
     <ProjectReference Include="..\TeduShop.Service\TeduShop.Service.csproj">
       <Project>{12a3e575-c435-4039-8baa-519128da34c5}</Project>
       <Name>TeduShop.Service</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TeduShop.Web\TeduShop.Web.csproj">
-      <Project>{f5783b17-f47d-41a7-8adc-b892d6787c5f}</Project>
-      <Name>TeduShop.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
